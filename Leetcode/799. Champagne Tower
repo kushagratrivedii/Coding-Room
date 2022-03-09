@@ -1,0 +1,25 @@
+This question is based on dynamic programming approach where if i have 6 glasses to be poured in the glass pyramid,first the very first glass will be filled means 6-1=5 remains 
+will be divided by 2 and will be distributed in the next row j and j+1th glasses means next row glasses(2) will have their equal share as 2.5 and then having 1, 1.5 will be
+further shared to the next row j and j+1 th and vice versa.
+
+
+
+class Solution {
+public:
+    double champagneTower(int poured, int query_row, int query_glass) {
+        double quantity[101][101] = {0.0};
+        quantity[0][0]=poured;
+        for(int i=0;i<100;i++)
+           {
+            for(int j=0;j<=i;j++)
+            {
+                if(quantity[i][j]>=1)
+                {quantity[i+1][j]+=(quantity[i][j]-1)/2.0;
+                 quantity[i+1][j+1]+=(quantity[i][j]-1)/2.0;
+                 quantity[i][j]=1;
+                }
+            }
+           }   
+            return quantity[query_row][query_glass];                              
+    }
+};
